@@ -19,9 +19,9 @@ const gulp        = require('gulp'),
 // Prevents Gulp from stopping.
 var handleError = function(err) {
   notify.onError("Error, check terminal for details.")(err);
-  console.log(chalk.white.bgRed(' <error> ------------------------ '));
+  console.log(chalk.white.bgRed(' ------------------------------ '));
   console.log(chalk.white(err.message));
-  console.log(chalk.white.bgRed(' </error> ----------------------- '));
+  console.log(chalk.white.bgRed(' ------------------------------ '));
   this.emit('end');
 }
 
@@ -31,12 +31,12 @@ gulp.task('sass', () => {
     .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(sass({ importer: sassImport() }).on('error', handleError))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./app/css'));
+    .pipe(gulp.dest('./app/assets/css'));
 });
 
 // Converts ES2015+ to ES5 & Supports Modules
 gulp.task('browserify', () => {
-  return browserify('./src/js/index.js', {debug: true})
+  return browserify('./src/js/app.js', {debug: true})
     .transform(babel)
     .bundle()
     .on('error', handleError)
@@ -44,7 +44,7 @@ gulp.task('browserify', () => {
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./app/js'));
+    .pipe(gulp.dest('./app/assets/js'));
 });
 
 // Watches our .scss & .js files for change
