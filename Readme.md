@@ -26,6 +26,7 @@ I'm using Gulp to handle most things and NPM for testing, deployment and linting
 - `gulp server`: This will start a Browsersync server with live-reload
 - `gulp sass`: This will compile your SASS
 - `gulp browserify`: This will transpile your JS from ES6 to ES5 (and handle `import`'s)
+- `gulp views`: This will build the HTML files from `.pug` files.
 - `gulp watch`: This will start a watcher for files
 
 

@@ -12,6 +12,7 @@ const gulp        = require('gulp'),
       sass        = require('gulp-sass'),
       sassImport  = require('sass-module-importer'),
       plumber     = require('gulp-plumber'),
+      pug         = require('gulp-pug'),
       watch       = require('gulp-watch'),
       browserSync = require('browser-sync').create();
 
@@ -47,11 +48,20 @@ gulp.task('browserify', () => {
     .pipe(gulp.dest('./app/assets/js'));
 });
 
+// Converts our .pug files to .html files
+gulp.task('views', () => {
+  return gulp.src(['./src/views/**/*.pug', '!./src/views/layout.pug'])
+    .pipe(pug())
+    .pipe(gulp.dest('./app'));
+});
+
 // Watches our .scss & .js files for change
 gulp.task('watch', () => {
-  watch('./src/sass/**/*.scss', () => { gulp.start('sass'); });
-  watch(['./src/js/**/*.js', './package.json'], () => { gulp.start('browserify'); });
-  watch('./app/**/**', () => { browserSync.reload(); });
+  console.log('watch running');
+  watch('./src/sass/**/*.scss', () => gulp.start('sass'));
+  watch(['./src/js/**/*.js', './package.json'], () => gulp.start('browserify'));
+  watch('./src/views/**/*.pug', () => gulp.start('views'));
+  watch('./app/**/**', () => browserSync.reload());
 });
 
 // Runs a simple browser sync server
@@ -65,7 +75,10 @@ gulp.task('server', function(done) {
 });
 
 // Builds our app
-gulp.task('build', ['sass', 'browserify']);
+gulp.task('build', ['sass', 'browserify', 'views']);
 
 // Starts the development process
 gulp.task('start', ['build', 'watch', 'server']);
+
+// Default
+gulp.task('default', ['build']);

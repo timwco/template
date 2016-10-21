@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "description": "This is a basic starter template.",
   "scripts": {
-    "test": "mocha --compilers js:babel-register || true",
-    "deploy": "surge -p \"$(npm prefix)/app\" -d \"$(whoami | tr '[:upper:]' '[:lower:]')-${PWD##*/}.surge.sh\"",
-    "lint": "eslint src/js || true"
+    "deploy": "surge -p \"$(npm prefix)/app\" -d \"$(whoami | tr '[:upper:]' '[:lower:]')-${PWD##*/}.surge.sh\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/twhitacre/template.git"
   },
-  "keywords": ["template", "starter gulp"],
+  "keywords": [
+    "template",
+    "starter gulp"
+  ],
   "author": "Tim Whitacre",
   "license": "ISC",
   "bugs": {
@@ -29,14 +30,12 @@
     "gulp": "^3.9.1",
     "gulp-notify": "2.2.0",
     "gulp-plumber": "^1.0.1",
+    "gulp-pug": "3.0.4",
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-watch": "^4.3.5",
     "sass-module-importer": "1.2.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
-  },
-  "dependencies": {
-    "normalize.css": "4.2.0"
   }
 }
